@@ -6,7 +6,8 @@ const port = 3000;
 
 app.engine('.hbs', engine({extname: '.hbs'}))
 app.set('view engine', '.hbs')
-app.set('views', './views')
+app.set('views', './views') //This specifies the directory where Express will look for view templates.
+
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/PasswordInitiator', (req, res) => {
-  res.send('Hello World!');
+  res.render('index') //index should be a string referring to the Handlebars template file name, aka index.hbs
 })
 
 app.listen(port, () => {
