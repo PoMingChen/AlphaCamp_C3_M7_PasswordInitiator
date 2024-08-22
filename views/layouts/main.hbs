@@ -6,6 +6,37 @@
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/PasswordInitiator.css" rel="stylesheet">
   <title>(Random) Password Initiator</title>
+
+  <style>
+    .invalid-feedback, .valid-feedback {
+      display: none;
+      font-size: 0.8em;
+    }
+
+    .invalid-feedback {
+      color: red;
+    }
+
+    .valid-feedback {
+      color: green;
+    }
+
+    form.was-validated .form-control:invalid ~ .invalid-feedback {
+      display: initial;
+    }
+
+    form.was-validated .form-control:valid ~ .valid-feedback {
+      display: initial;
+    }
+
+    form.was-validated .form-control:invalid {
+      border-color: red;
+    }
+
+    form.was-validated .form-control:valid {
+      border-color: green ;
+    }
+  </style>
 </head>
 
 <body>
@@ -15,7 +46,19 @@
 
     <div class="form-group">
         <label for="name">姓名：</label> {{!--for="name" 和 id="name" 會互相綁定--}}
-        <input name="name" id="name" placeholder="請輸入你的全名..." type="text" maxlength="3" required>
+        <input name="name" id="name" placeholder="請輸入你的全名..." type="text" maxlength="3" class="form-control" required>
+        <div class="invalid-feedback">
+          This field is required.
+        </div>
+
+        <div class="valid-feedback">
+          Good!
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">電子郵件地址</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="請輸入你的電子郵件 ..." required>
     </div>
 
     <div class="form-group">
@@ -79,6 +122,25 @@
 
   </form>
   
+  {{!-- 為了展示方便，助教把 HTML/CSS/JS 寫在同一支檔案裡，一般情況還是建議大家拆開。  --}}
+  <script>
+    const form = document.querySelector('form')
+    const submitButton = document.querySelector('#submit-btn')
+
+    submitButton.addEventListener('click', function onSubmitButtonClicked(event) {
+        form.classList.add('was-validated')
+    })
+
+    form.addEventListener('submit', function onFormSubmit(event){
+        if(!form.checkValidity()){
+          event.stopPropagation() //停止向父層元素傳遞
+          event.preventDefault() //停止（瀏覽器）預設行為，像是頁面在提交時刷新
+          alert('Form invalid')  //驗證不通過，就跳 alert
+        }
+
+    })
+  </script>
+
   <script src="/javascripts/bootstrap.bundle.min.js"></script>
 </body>
 
