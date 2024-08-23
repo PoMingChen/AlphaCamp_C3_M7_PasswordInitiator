@@ -15,8 +15,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/PasswordInitiator', (req, res) => {
-  res.render('index') //index should be a string referring to the Handlebars template file name, aka index.hbs
-})
+  const passwordLength = req.query.passwordLength;
+  const excludeCharacters = req.query.excludeCharacters;
+  res.render('index', { passwordLength, excludeCharacters });
+  
+  //index should be a string referring to the Handlebars template file name, aka index.hbs
+
+});
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
