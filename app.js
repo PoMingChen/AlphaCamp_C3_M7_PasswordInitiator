@@ -1,5 +1,6 @@
 const express = require('express');
 const {engine} = require('express-handlebars');
+const { generatePassword } = require('./generate_password'); //import generatePassword function from generate_password.js
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -17,7 +18,8 @@ app.get('/', (req, res) => {
 app.get('/PasswordInitiator', (req, res) => {
   const passwordLength = req.query.passwordLength;
   const excludeCharacters = req.query.excludeCharacters;
-  res.render('index', { passwordLength, excludeCharacters });
+  const [generatedPassword, collection_behind] = generatePassword();
+  res.render('index', { passwordLength, excludeCharacters, generatedPassword});
   
   //index should be a string referring to the Handlebars template file name, aka index.hbs
 

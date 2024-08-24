@@ -50,10 +50,11 @@ function generatePassword() {
   return [password, collection];
 }
 
+module.exports = { generatePassword };
 
-const [generatedPassword, collection_behind] = generatePassword();
+// const [generatedPassword, collection_behind] = generatePassword();
 
-console.log('generatedPassword:', generatedPassword);
-console.log('collection_behind:', collection_behind);
+// console.log('generatedPassword:', generatedPassword);
+// console.log('collection_behind:', collection_behind);
 
  
