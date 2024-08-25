@@ -1,13 +1,15 @@
 const express = require('express');
 const {engine} = require('express-handlebars');
-const { generatePassword } = require('./generate_password'); //import generatePassword function from generate_password.js
+//import generatePassword function from generate_password.js
+const { generatePassword } = require('./generate_password'); 
 const path = require('path');
 const app = express();
 const port = 3000;
 
 app.engine('.hbs', engine({extname: '.hbs'}))
 app.set('view engine', '.hbs')
-app.set('views', './views') //This specifies the directory where Express will look for view templates.
+ //This specifies the directory where Express will look for view templates.
+app.set('views', './views')
 
 app.use(express.static('public'))
 
@@ -18,14 +20,13 @@ app.get('/', (req, res) => {
 app.get('/PasswordInitiator', (req, res) => {
 
   const queryContent = req.query;
-  // const [password, collectionInBehind] = generatePassword(queryContent);
   const password = generatePassword(queryContent);
   res.render('index', {password, 
-                      //  collectionInBehind,
                        queryContent
                       });
 });
 
+//starts the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
-}) //starts the server
+}) 

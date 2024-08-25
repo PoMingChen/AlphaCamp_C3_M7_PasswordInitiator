@@ -5,7 +5,7 @@
   <meta charset="utf-8">
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/PasswordInitiator.css" rel="stylesheet">
-  <title>(Random) Password Initiator</title>
+  <title>(Random) Password Generator</title>
 </head>
 
 <body class="bg-dark">
@@ -123,8 +123,12 @@
       Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
           if (!form.checkValidity()) {
-            event.preventDefault() //停止（瀏覽器）預設行為，像是頁面在提交時刷新
-            event.stopPropagation() //停止向父層元素傳遞
+
+            //prevents the default action of the event.
+            event.preventDefault()
+
+            //prevents the event from reaching other elements in the DOM tree.
+            event.stopPropagation() 
           }
 
           form.classList.add('was-validated')

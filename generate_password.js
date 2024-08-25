@@ -31,12 +31,12 @@ function generatePassword(queryContent) {
     collection = collection.concat(symbols.split(''));
   }
 
-  // remove thins user do not need with filter(), includes()
+  // remove thins user do not want with filter(), includes()
  if (options.excludeCharacters) {
     collection = collection.filter(character => !options.excludeCharacters.includes(character));
   }
 
-  // return error notice if collection is empty
+  // return notice if collection is empty
   if (collection.length === 0) {
     return 'There is no valid characters in your selection.';
   }
