@@ -24,8 +24,11 @@ app.get('/PasswordInitiator', (req, res) => {
   // const excludeCharacters = req.query.excludeCharacters;  // still need to check if the query string is empty or not
 
   const queryContent = req.query;
-  const [generatedPassword, collection_behind] = generatePassword(queryContent);
-  res.render('index', {generatedPassword, collection_behind});
+  const [password, collectionInBehind] = generatePassword(queryContent);
+  res.render('index', {password: password, 
+                       collectionInBehind: collectionInBehind,
+                       queryContent: queryContent
+                      });
   
   //index should be a string referring to the Handlebars template file name, aka index.hbs
 

@@ -34,7 +34,7 @@
                 <label for="password-length" class="col-sm-4 col-form-label">Password Length</label>
                 <div class="col-sm-8">
                   <input type="number" class="form-control" id="password-length" placeholder="Enter password length"
-                    name="passwordLength" min="4" max="16" required>
+                    name="passwordLength" min="4" max="16" value = "{{queryContent.passwordLength}}" required>
                   <small class="form-text text-muted">Length is available between 4 ~ 16</small>
                   <div class="valid-feedback">Looks good!</div>
                   <div class="invalid-feedback">Please provide a valid length</div>
@@ -46,7 +46,7 @@
                 <label class="col-sm-4 col-form-label">Include Lowercase Characters</label>
                 <div class="col-sm-8">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="lowercase" name="includeLowercase" value="lowercase">
+                    <input class="form-check-input" type="checkbox" id="lowercase" name="includeLowercase" {{#if queryContent.includeLowercase}}checked{{/if}} value="lowercase">
                     <label class="form-check-label" for="lowercase"> (e.g. abcdefg)</label>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
                 <label class="col-sm-4 col-form-label">Include Uppercase Characters</label>
                 <div class="col-sm-8">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="uppercase" name="includeUppercase" value="uppercase">
+                    <input class="form-check-input" type="checkbox" id="uppercase" name="includeUppercase" {{#if queryContent.includeUppercase}}checked{{/if}} value="uppercase">
                     <label class="form-check-label" for="uppercase"> (e.g. ABCDEFG)</label>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                 <label class="col-sm-4 col-form-label">Include Numbers</label>
                 <div class="col-sm-8">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="numbers" name="includeNumbers" value="numbers ">
+                    <input class="form-check-input" type="checkbox" id="numbers" name="includeNumbers" {{#if queryContent.includeNumbers}}checked{{/if}} value="numbers ">
                     <label class="form-check-label" for="numbers"> (e.g. 123456)</label>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                 <label class="col-sm-4 col-form-label">Include Symbols</label>
                 <div class="col-sm-8">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="symbols" name="includeSymbols" value="symbols">
+                    <input class="form-check-input" type="checkbox" id="symbols" name="includeSymbols" {{#if queryContent.includeSymbols}}checked{{/if}} value="symbols">
                     <label class="form-check-label" for="symbols"> (e.g. @#$%)</label>
                   </div>
                 </div>
@@ -89,12 +89,12 @@
               <div class="form-group row mb-3">
                 <label for="exclude-characters" class="col-sm-4 col-form-label">Exclude Characters</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="exclude-characters" placeholder="Characters to exclude" name="excludeCharacters">
+                  <input type="text" class="form-control" id="exclude-characters" placeholder="Characters to exclude" name="excludeCharacters" value = "{{queryContent.excludeCharacters}}">
                   <small class="form-text text-muted">These characters will not appear in the password<small>
                 </div>
               </div>
 
-              {{#if generatedPassword}}
+              {{#if password}}
               <div class="alert alert-info mt-4">
                 {{!-- <strong>Password Length:</strong> {{passwordLength}} <br> --}}
                 {{!-- <strong>Include Lowercase Characters</strong> {{lowercase}} <br>
@@ -102,8 +102,8 @@
                 <strong>Include Numbers</strong> {{numbers}} <br>
                 <strong>Include Symbols</strong> {{symbols}} <br>
                 <strong>Exclude Characters</strong> {{excludeCharacters}} <br> --}}
-                <strong>collection_behind:</strong> {{collection_behind}} <br>
-                <strong>generatedPassword:</strong> {{generatedPassword}}
+                <strong>collectionInBehind:</strong> {{collectionInBehind}} <br>
+                <strong>generatedPassword:</strong> {{password}}
               </div>
               {{/if}}
 
