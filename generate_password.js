@@ -12,14 +12,9 @@ function generatePassword(queryContent) {
   const symbols = '!@#$%^&*()_+';
 
   const options = queryContent
-  // const options = {
-  //   length: queryContent.passwordLength,
-  //   // for the checkbox options such as lowercase, uppercase, if it is checked, the server will receive 'on' as default. If it is not checked, the server will not receive the key.
-  //   excludeCharacters: queryContent.excludeCharacters
-  // }
-
   let collection = []
 
+  // for the checkbox options such as lowercase, uppercase, if it is checked, the server will receive 'on' as default. If it is not checked, the server will not receive the key.
   if (options.includeLowercase === 'on') {
     collection = collection.concat(lowerCaseLetters.split(''));
   }
@@ -36,18 +31,23 @@ function generatePassword(queryContent) {
     collection = collection.concat(symbols.split(''));
   }
 
-  // remove thins user do not need
-  // filter, includes
+  // remove thins user do not need with filter(), includes()
  if (options.excludeCharacters) {
     collection = collection.filter(character => !options.excludeCharacters.includes(character));
   }
 
+  // return error notice if collection is empty
+  if (collection.length === 0) {
+    return 'There is no valid characters in your selection.';
+  }
+
+  //start generating password
   let password = ''
   for (let i = 0; i < options.passwordLength; i++) {
     password += sample(collection)
   }
 
-  return [password, collection];
+  return password
 }
 
 module.exports = { generatePassword };

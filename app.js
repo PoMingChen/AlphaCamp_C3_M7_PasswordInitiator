@@ -18,9 +18,10 @@ app.get('/', (req, res) => {
 app.get('/PasswordInitiator', (req, res) => {
 
   const queryContent = req.query;
-  const [password, collectionInBehind] = generatePassword(queryContent);
+  // const [password, collectionInBehind] = generatePassword(queryContent);
+  const password = generatePassword(queryContent);
   res.render('index', {password, 
-                       collectionInBehind,
+                      //  collectionInBehind,
                        queryContent
                       });
 });

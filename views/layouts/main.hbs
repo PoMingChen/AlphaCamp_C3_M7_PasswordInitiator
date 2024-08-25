@@ -96,13 +96,6 @@
 
               {{#if password}}
               <div class="alert alert-info mt-4">
-                {{!-- <strong>Password Length:</strong> {{passwordLength}} <br> --}}
-                {{!-- <strong>Include Lowercase Characters</strong> {{lowercase}} <br>
-                <strong>Include Uppercase Characters</strong> {{uppercase}} <br>
-                <strong>Include Numbers</strong> {{numbers}} <br>
-                <strong>Include Symbols</strong> {{symbols}} <br>
-                <strong>Exclude Characters</strong> {{excludeCharacters}} <br> --}}
-                <strong>collectionInBehind:</strong> {{collectionInBehind}} <br>
                 <strong>generatedPassword:</strong> {{password}}
               </div>
               {{/if}}
@@ -130,8 +123,8 @@
       Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
           if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
+            event.preventDefault() //停止（瀏覽器）預設行為，像是頁面在提交時刷新
+            event.stopPropagation() //停止向父層元素傳遞
           }
 
           form.classList.add('was-validated')
