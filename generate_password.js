@@ -11,30 +11,28 @@ function generatePassword(queryContent) {
   const numbers = '0123456789';
   const symbols = '!@#$%^&*()_+';
 
-  const options = {
-    length: queryContent.passwordLength,
-    lowercase: typeof queryContent.includeLowercase !== 'undefined' ? 'on' : 'off',
-    uppercase: typeof queryContent.includeUppercase !== 'undefined' ? 'on' : 'off',
-    numbers:   typeof queryContent.includeNumbers !== 'undefined' ? 'on' : 'off',
-    symbols:   typeof queryContent.includeSymbols !== 'undefined' ? 'on' : 'off',
-    excludeCharacters: queryContent.excludeCharacters
-  }
+  const options = queryContent
+  // const options = {
+  //   length: queryContent.passwordLength,
+  //   // for the checkbox options such as lowercase, uppercase, if it is checked, the server will receive 'on' as default. If it is not checked, the server will not receive the key.
+  //   excludeCharacters: queryContent.excludeCharacters
+  // }
 
   let collection = []
 
-  if (options.lowercase === 'on') {
+  if (options.includeLowercase === 'on') {
     collection = collection.concat(lowerCaseLetters.split(''));
   }
 
-  if (options.uppercase === 'on') {
+  if (options.includeUppercase === 'on') {
     collection = collection.concat(upperCaseLetters.split(''));
   }
 
-  if (options.numbers === 'on') {
+  if (options.includeNumbers === 'on') {
     collection = collection.concat(numbers.split(''));
   }
 
-  if (options.symbols === 'on') {
+  if (options.includeSymbols === 'on') {
     collection = collection.concat(symbols.split(''));
   }
 
@@ -45,7 +43,7 @@ function generatePassword(queryContent) {
   }
 
   let password = ''
-  for (let i = 0; i < options.length; i++) {
+  for (let i = 0; i < options.passwordLength; i++) {
     password += sample(collection)
   }
 
