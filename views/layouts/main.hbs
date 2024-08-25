@@ -57,7 +57,7 @@
                 <label class="col-sm-4 col-form-label">Include Uppercase Characters</label>
                 <div class="col-sm-8">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="uppercase" name="uppercase" value="uppercase">
+                    <input class="form-check-input" type="checkbox" id="uppercase" name="includeUppercase" value="uppercase">
                     <label class="form-check-label" for="uppercase"> (e.g. ABCDEFG)</label>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                 <label class="col-sm-4 col-form-label">Include Numbers</label>
                 <div class="col-sm-8">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="numbers" name="numbers" value="numbers ">
+                    <input class="form-check-input" type="checkbox" id="numbers" name="includeNumbers" value="numbers ">
                     <label class="form-check-label" for="numbers"> (e.g. 123456)</label>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                 <label class="col-sm-4 col-form-label">Include Symbols</label>
                 <div class="col-sm-8">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="symbols" name="symbols" value="symbols">
+                    <input class="form-check-input" type="checkbox" id="symbols" name="includeSymbols" value="symbols">
                     <label class="form-check-label" for="symbols"> (e.g. @#$%)</label>
                   </div>
                 </div>
@@ -94,11 +94,15 @@
                 </div>
               </div>
 
-              {{#if passwordLength}}
+              {{#if generatedPassword}}
               <div class="alert alert-info mt-4">
-                <strong>Password Length:</strong> {{passwordLength}} <br>
-                <strong>Exclude Characters:</strong> {{excludeCharacters}}
-                <strong>Password Length:</strong> {{passwordLength}} <br>
+                {{!-- <strong>Password Length:</strong> {{passwordLength}} <br> --}}
+                {{!-- <strong>Include Lowercase Characters</strong> {{lowercase}} <br>
+                <strong>Include Uppercase Characters</strong> {{uppercase}} <br>
+                <strong>Include Numbers</strong> {{numbers}} <br>
+                <strong>Include Symbols</strong> {{symbols}} <br>
+                <strong>Exclude Characters</strong> {{excludeCharacters}} <br> --}}
+                <strong>collection_behind:</strong> {{collection_behind}} <br>
                 <strong>generatedPassword:</strong> {{generatedPassword}}
               </div>
               {{/if}}
@@ -108,7 +112,6 @@
                 <button id='#submitButton' type="submit" class="btn btn-success btn-block">Generate Password</button>
               </div>
 
-            
             </form>
           </div>
         </div>

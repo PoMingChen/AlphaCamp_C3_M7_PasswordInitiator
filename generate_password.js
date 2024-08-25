@@ -4,7 +4,7 @@ function sample(collection) {
   return collection[randomIndex]
 }
 
-function generatePassword() {
+function generatePassword(queryContent) {
   // define things user might want
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
   const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -12,12 +12,12 @@ function generatePassword() {
   const symbols = '!@#$%^&*()_+';
 
   const options = {
-    length: 12,
-    lowercase: 'on', 
-    // uppercase: 'on',
-    numbers: 'on',
-    symbols: 'on',
-    excludeCharacters: '02468'
+    length: queryContent.passwordLength,
+    lowercase: typeof queryContent.includeLowercase !== 'undefined' ? 'on' : 'off',
+    uppercase: typeof queryContent.includeUppercase !== 'undefined' ? 'on' : 'off',
+    numbers:   typeof queryContent.includeNumbers !== 'undefined' ? 'on' : 'off',
+    symbols:   typeof queryContent.includeSymbols !== 'undefined' ? 'on' : 'off',
+    excludeCharacters: queryContent.excludeCharacters
   }
 
   let collection = []
@@ -38,7 +38,9 @@ function generatePassword() {
     collection = collection.concat(symbols.split(''));
   }
 
-  if (options.excludeCharacters) {
+  // remove thins user do not need
+  // filter, includes
+ if (options.excludeCharacters) {
     collection = collection.filter(character => !options.excludeCharacters.includes(character));
   }
 
@@ -51,10 +53,3 @@ function generatePassword() {
 }
 
 module.exports = { generatePassword };
-
-// const [generatedPassword, collection_behind] = generatePassword();
-
-// console.log('generatedPassword:', generatedPassword);
-// console.log('collection_behind:', collection_behind);
-
- 
